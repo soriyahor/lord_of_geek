@@ -12,7 +12,7 @@
             <?php
             echo $description . "($prix Euros)";
             ?>	
-            <a href="index.php?uc=gererPanier&jeu=<?php echo $id ?>&action=supprimerUnJeu" onclick="return confirm('Voulez-vous vraiment retirer ce jeu ?');">
+            <a href="index.php?uc=panier&jeu=<?php echo $id ?>&action=supprimerUnJeu" onclick="return confirm('Voulez-vous vraiment retirer ce jeu ?');">
                 <img src="public/images/retirerpanier.png" TITLE="Retirer du panier" >
             </a>
         </p>

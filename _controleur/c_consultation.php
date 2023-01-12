@@ -30,4 +30,3 @@ switch ($action) {
 }
 
 $lesCategories = $model_cat->getLesCategories();
-include("_vue/v_jeux.php");

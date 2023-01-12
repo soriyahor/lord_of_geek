@@ -71,9 +71,9 @@ class M_commande {
     
     /**
      * 
-     * @return type
+     * @return array
      */
-    public function getErreur() {
+    public function getErreurs() {
         return $this->erreurs;
     }
 

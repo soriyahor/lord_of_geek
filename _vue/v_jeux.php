@@ -30,9 +30,7 @@
                         <img src="public/images/mettrepanier.png" title="Ajouter au panier" class="add"/>
                     </a>
                 </p>
-
             </article>
-
             <?php
         }
         ?>

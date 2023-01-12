@@ -10,8 +10,31 @@ ini_set("display_errors", 1);
 require_once("util/fonctions.inc.php");
 
 $uc = filter_input(INPUT_GET, 'uc'); // Use Case
-$action = filter_input(INPUT_GET, 'action');// Action
+$action = filter_input(INPUT_GET, 'action'); // Action
 initPanier();
 
-include("_vue/template.html.php");
+if(!$uc){
+    $uc = 'accueil';
+}
+
+// Controleur principale
+switch ($uc) {
+    case 'visite' :
+        include '_controleur/c_consultation.php';
+        break;
+    case 'panier' :
+        include '_controleur/c_gestionPanier.php';
+        break;
+    case 'commander':
+        include '_controleur/c_passerCommande.php';
+        break;
+    case 'administrer' :
+        include '_controleur/c_gestionJeux.php';
+        break;
+    default:
+        break;
+}
+
+
+include("_vue/template.php");
 

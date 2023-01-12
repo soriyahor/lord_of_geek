@@ -16,32 +16,35 @@ Prototype de Lord Of Geek (LOG)
             <!--  Menu haut-->
             <nav  id="menu">
                 <ul>
-                    <li><a href="index.php"> Accueil </a></li>
+                    <li><a href="index.php?uc=accueil"> Accueil </a></li>
                     <li><a href="index.php?uc=visite&action=voirCategories"> Voir le catalogue de jeux </a></li>
-                    <li><a href="index.php?uc=gererPanier&action=voirPanier"> Voir son panier </a></li>
+                    <li><a href="index.php?uc=panier&action=voirPanier"> Voir son panier </a></li>
                     <li><a href="index.php?uc=administrer"> Administrer </a></li>
                 </ul>
             </nav>
-            
+
         </header>
         <main>
             <?php
+            // Controleur de vues
             // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
-            switch ($uc) {                   
+            switch ($uc) {
+                case 'accueil':
+                    include '_vue/v_accueil.php';
+                    break;
                 case 'visite' :
-                    include '_controleur/c_consultation.php';
+                    include("_vue/v_jeux.php");
                     break;
-                case 'gererPanier' :
-                    include '_controleur/c_gestionPanier.php';
+                case 'panier' :
+                    include("_vue/v_panier.php");
                     break;
-                case  'commander':
-                    include '_controleur/c_passerCommande.php';
+                case 'commander':
+                    include ("_vue/v_commande.php");
                     break;
                 case 'administrer' :
-                    include '_controleur/c_gestionJeux.php';
+                    include ("_vue/v_gestion.php");
                     break;
                 default:
-                    include '_vue/v_accueil.php';
                     break;
             }
             ?>

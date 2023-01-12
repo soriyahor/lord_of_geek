@@ -15,10 +15,10 @@ switch ($action) {
             $rue = '';
             $ville = '';
             $cp = '';
-            $mail = '';
-            include ("_vue/v_commande.php");
+            $mail = '';            
         } else {
             afficheMessage("Panier vide !!");
+            $uc = '';
         }
         break;
     case 'confirmerCommande' :
@@ -30,12 +30,12 @@ switch ($action) {
         if(!$model_cmd->estValide($nom, $rue, $ville, $cp, $mail)){
             // Si une erreur, on recommence
             afficheErreurs($model_cmd->getErreurs());
-            include ("_vue/v_commande.php");
         }else{
             $lesIdJeu = getLesIdJeuxDuPanier();
             $model_cmd->creerCommande($nom, $rue, $cp, $ville, $mail, $lesIdJeu);
             supprimerPanier();
             afficheMessage("Commande enregistrée");
+            $uc = '';
         }
         break;
 }
