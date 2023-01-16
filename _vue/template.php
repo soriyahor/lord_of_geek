@@ -7,11 +7,11 @@ Prototype de Lord Of Geek (LOG)
         <title>Lord Of Geek 2022</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="public/cssGeneral.css" rel="stylesheet" type="text/css">
-        <meta charset="UTF-8">        
+        <meta charset="UTF-8">
     </head>
     <body>
         <header>
-            <!-- Images En-tête --> 
+            <!-- Images En-tête -->
             <img src="public/images/logo.png" alt="Logo Lord Of Geek" />
             <!--  Menu haut-->
             <nav  id="menu">
@@ -19,7 +19,7 @@ Prototype de Lord Of Geek (LOG)
                     <li><a href="index.php?uc=accueil"> Accueil </a></li>
                     <li><a href="index.php?uc=visite&action=voirCategories"> Voir le catalogue de jeux </a></li>
                     <li><a href="index.php?uc=panier&action=voirPanier"> Voir son panier </a></li>
-                    <li><a href="index.php?uc=administrer"> Administrer </a></li>
+                    <li><a href="index.php?uc=compte"> Mon compte </a></li>
                 </ul>
             </nav>
 
@@ -41,8 +41,8 @@ Prototype de Lord Of Geek (LOG)
                 case 'commander':
                     include ("_vue/v_commande.php");
                     break;
-                case 'administrer' :
-                    include ("_vue/v_gestion.php");
+                case 'compte' :
+                    include ("_vue/v_compte.php");
                     break;
                 default:
                     break;
