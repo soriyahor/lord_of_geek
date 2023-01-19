@@ -4,7 +4,7 @@
             <?php
             foreach ($lesCategories as $uneCategorie) {
                 $idCategorie = $uneCategorie['id'];
-                $libCategorie = $uneCategorie['libelle'];
+                $libCategorie = $uneCategorie['nom'];
                 ?>
                 <li>
                     <a href=index.php?uc=visite&categorie=<?php echo $idCategorie ?>&action=voirJeux><?php echo $libCategorie ?></a>
@@ -21,12 +21,12 @@
             $description = $unJeu['description'];
             $prix = $unJeu['prix'];
             $image = $unJeu['image'];
-            ?>	
+            ?>
             <article>
                 <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>"/>
                 <p><?= $description ?></p>
-                <p><?= "Prix : " . $prix . " Euros" ?> 
-                    <a href="index.php?uc=visite&categorie=<?= $categorie ?>&jeu=<?= $id ?>&action=ajouterAuPanier"> 
+                <p><?= "Prix : " . $prix . " Euros" ?>
+                    <a href="index.php?uc=visite&categorie=<?= $categorie ?>&jeu=<?= $id ?>&action=ajouterAuPanier">
                         <img src="public/images/mettrepanier.png" title="Ajouter au panier" class="add"/>
                     </a>
                 </p>

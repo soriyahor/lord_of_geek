@@ -30,19 +30,19 @@ Prototype de Lord Of Geek (LOG)
             // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
             switch ($uc) {
                 case 'accueil':
-                    include '_vue/v_accueil.php';
+                    include 'App/vue/v_accueil.php';
                     break;
                 case 'visite' :
-                    include("_vue/v_jeux.php");
+                    include("App/vue/v_jeux.php");
                     break;
                 case 'panier' :
-                    include("_vue/v_panier.php");
+                    include("App/vue/v_panier.php");
                     break;
                 case 'commander':
-                    include ("_vue/v_commande.php");
+                    include ("App/vue/v_commande.php");
                     break;
                 case 'compte' :
-                    include ("_vue/v_compte.php");
+                    include ("App/vue/v_compte.php");
                     break;
                 default:
                     break;
