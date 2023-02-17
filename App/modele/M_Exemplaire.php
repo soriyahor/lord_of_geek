@@ -7,6 +7,9 @@
  */
 class M_Exemplaire {
 
+    const sql = "SELECT e.id, j.nom, statut, description, prix, image, id_categories FROM exemplaires as e
+    join jeu as j on j.id=e.id_jeu join etat as et on et.id=e.id_etat ";
+
     /**
      * Retourne sous forme d'un tableau associatif tous les jeux de la
      * catégorie passée en argument
@@ -15,9 +18,15 @@ class M_Exemplaire {
      * @return un tableau associatif
      */
     public static function trouveLesJeuxDeCategorie($idCategorie) {
-        $req = "SELECT * FROM exemplaires WHERE categorie_id = '$idCategorie'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        $req = self::sql."WHERE id_categories = :idCat";
+        // $req = "SELECT * FROM exemplaires WHERE categorie_id = '$idCategorie'";
+        // $res = AccesDonnees::query($req);
+        $pdo=AccesDonnees::getPdo();
+        $statement=$pdo->prepare($req);
+        $statement->bindParam(':idCat',$idCategorie, PDO::PARAM_INT);
+        $statement->execute();
+
+        $lesLignes = $statement->fetchAll();
         return $lesLignes;
     }
 
@@ -32,13 +41,22 @@ class M_Exemplaire {
         $lesProduits = array();
         if ($nbProduits != 0) {
             foreach ($desIdJeux as $unIdProduit) {
-                $req = "SELECT * FROM exemplaires WHERE id = '$unIdProduit'";
-                $res = AccesDonnees::query($req);
-                $unProduit = $res->fetch();
+                $req = self::sql."WHERE e.id = :unIdProduit";
+                $pdo=AccesDonnees::getPdo();
+                $statement=$pdo->prepare($req);
+                $statement->bindParam('unIdProduit', $unIdProduit, PDO::PARAM_INT);
+                $statement->execute();
+                // $res = AccesDonnees::query($req);
+                $unProduit = $statement->fetch();
                 $lesProduits[] = $unProduit;
             }
         }
         return $lesProduits;
     }
 
+    public static function trouveLesJeux(){
+        $res = AccesDonnees::query(self::sql);
+        $lesLignes = $res->fetchAll();
+        return $lesLignes;
+    }
 }

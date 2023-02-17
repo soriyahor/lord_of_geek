@@ -3,8 +3,16 @@
         <fieldset>
             <legend>Commande</legend>
             <p>
-                <label for="nom">Nom Prénom*</label>
+                <label for="nom">Nom*</label>
                 <input id="nom" type="text" name="nom" value="<?= $nom ?>" size="30" maxlength="45">
+            </p>
+            <p>
+                <label for="prenom">Prénom*</label>
+                <input id="prenom" type="text" name="prenom" value="<?= $prenom?>" size="30" maxlength="45">
+            </p>
+            <p>
+                <label for="numRue"> numéro de rue*</label>
+                <input id="numRue" type="text" name="numRue" value="<?= $numRue ?>" size="30" maxlength="45">
             </p>
             <p>
                 <label for="rue">rue*</label>
@@ -16,7 +24,7 @@
             </p>
             <p>
                 <label for="ville">ville* </label>
-                <input id="ville" type="text" name="ville"  value="<?= $ville ?>" size="5" maxlength="5">
+                <input id="ville" type="text" name="ville"  value="<?= $ville ?>" size="30" maxlength="45">
             </p>
             <p>
                 <label for="mail">mail* </label>

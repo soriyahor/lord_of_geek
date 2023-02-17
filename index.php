@@ -23,16 +23,22 @@ if (!$uc) {
 
 // Controleur principale
 switch ($uc) {
-    case 'visite' :
+    case 'visite':
         include 'App/controleur/c_consultation.php';
         break;
-    case 'panier' :
+    case 'panier':
         include 'App/controleur/c_gestionPanier.php';
         break;
     case 'commander':
         include 'App/controleur/c_passerCommande.php';
         break;
-    case 'administrer' :
+    case 'administrer':
+        include 'App/controleur/c_monCompte.php';
+        break;
+    case 'inscrire':
+        include 'App/controleur/c_monCompte.php';
+        break;
+    case 'commandes':
         include 'App/controleur/c_monCompte.php';
         break;
     default:
@@ -41,4 +47,3 @@ switch ($uc) {
 
 
 include("App/vue/template.php");
-

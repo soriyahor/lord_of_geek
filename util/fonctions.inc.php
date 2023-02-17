@@ -98,3 +98,14 @@ function afficheErreurs(array $msgErreurs) {
 function afficheMessage(string $msg) {
     echo '﻿<div class="message">'.$msg.'</div>';
 }
+
+/**
+ * Si email existe
+ *
+ * @param String $str
+ * @return boolean
+ */
+function is_existe(String $str):bool
+{
+    return isset($str) && !empty($str);
+}
