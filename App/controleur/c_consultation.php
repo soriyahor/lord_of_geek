@@ -7,12 +7,23 @@ include 'App/modele/M_exemplaire.php';
  * @author Loic LOG
  */
 switch ($action) {
+    case 'accueil':
+        if(isset($_SESSION['id'])){
+           $lesJeux = $_SESSION['jeux_vues'];
+        }
+        break;
     case 'voirJeux':
         $categorie = filter_input(INPUT_GET, 'categorie');
         $lesJeux = M_Exemplaire::trouveLesJeuxDeCategorie($categorie);
+        if(isset($_SESSION['id'])){
+            $_SESSION['jeux_vues'] = $lesJeux;
+        }
         break;
     case 'voirTousLesJeux':
         $lesJeux = M_Exemplaire::trouveLesJeux();
+        if(isset($_SESSION['id'])){
+            $_SESSION['jeux_vues'] = $lesJeux;
+        }
         break;
     case 'ajouterAuPanier':
         $idJeu = filter_input(INPUT_GET, 'jeu');

@@ -35,6 +35,21 @@ class M_Compte
         $idClient = AccesDonnees::getPdo()->lastInsertId();
     }
 
+    public static function recupererUtilisateurId($mail) {
+        $sql = 'SELECT id FROM clients ';
+        $sql .= 'WHERE email = :mail';
+
+        // prepare and bind
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":mail", $mail, PDO::PARAM_STR);
+        $stmt->execute();
+        // Exécution
+        $res = $stmt->fetch();
+        return $res['id'];
+
+    }
+
     /**
      * Fonction qui vérifie que l'identification saisie est correcte.
      */

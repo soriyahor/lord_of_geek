@@ -22,52 +22,43 @@ class M_Commande
      * @param $listJeux
 
      */
-    public static function creerCommande($nom, $prenom, $numRue, $rue, $cp, $ville, $mail, $listJeux)
+    public static function creerCommande($listJeux)
     {
-
-        $reqVille = "insert into ville(nom) values ('$ville')";
-        $resVille = AccesDonnees::exec($reqVille);
-        $idVille = AccesDonnees::getPdo()->lastInsertId();
-
-        $reqAdresse = "insert into adresse(numero, rue, cp, id_ville) values ('$numRue', '$rue', '$cp', '$idVille')";
-        $resAdresse = AccesDonnees::exec($reqAdresse);
-        $idAdresse = AccesDonnees::getPdo()->lastInsertId();
-
-        $reqClient = "insert into clients(nom, prenom, email, id_adresse) values ('$nom','$prenom', '$mail', '$idAdresse')";
-        $resClient = AccesDonnees::exec($reqClient);
-        $idClient = AccesDonnees::getPdo()->lastInsertId();
-
+        $erreurs = [];
+        if(!isset($_SESSION['id'])){
+            $erreurs[] = "Connectez-vous !";
+            return $erreurs;
+        }
+        
+        $idClient = $_SESSION['id'];
+        // var_dump($_SESSION);
         $reqCommande = "insert into commandes(id_clients) values ('$idClient')";
 
-        $resCommande = AccesDonnees::exec($reqCommande);
+        AccesDonnees::exec($reqCommande);
         $idCommande = AccesDonnees::getPdo()->lastInsertId();
 
-
-
-
         foreach ($listJeux as $jeu) {
-            $req = "insert into lignes_commande(commande_id, exemplaire_id) values ('$idCommande','$jeu')";
-            $res = AccesDonnees::exec($req);
+            $reqJeu = "select * from exemplaires where id = :jeu";
+            $pdo=AccesDonnees::getPdo();
+            $statement=$pdo->prepare($reqJeu);
+            $statement->bindParam(':jeu',$jeu, PDO::PARAM_INT);
+            $statement->execute();
+            $jeuBDD = $statement->fetch(PDO::FETCH_ASSOC);
+            $prix = $jeuBDD['prix'];
+
+            $req = "insert into lignes_commande(commande_id, exemplaire_id, prix, quantite) values ('$idCommande','$jeu', '$prix', 1)";
+            AccesDonnees::exec($req);
         }
+        return $erreurs;
     }
 
     public static function voirCommandes()
     {
 
-        $mail = $_SESSION['mail'];
-
-        $reqClient = "select id from clients where email=:mail";
-        $pdo=AccesDonnees::getPdo();
-        $statement=$pdo->prepare($reqClient);
-        $statement->bindParam(':mail',$mail, PDO::PARAM_STR);
-        $statement->execute();
-        $idClient = $statement->fetch();
-        var_dump($idClient);
-
-        $reqCommande = "select co.id, co.created_at, co.updated_at, co.id_clients,
+        $reqCommande = "select co.id, co.created_at, co.id_clients,
         lc.quantite, lc.prix,
         etat.statut,
-        jeu.nom as nom_jeu, jeu.image, jeu.description, jeu.version,
+        jeu.nom as nom_jeu, jeu.description, jeu.version,
         console.nom as nom_console, ca.nom as cat
         from commandes as co
         join lignes_commande as lc
@@ -87,10 +78,10 @@ class M_Commande
 
         $pdo=AccesDonnees::getPdo();
         $statement=$pdo->prepare($reqCommande);
-        $statement->bindParam(':idClient',$idClient, PDO::PARAM_INT);
+        $statement->bindParam(':idClient',$_SESSION['id'], PDO::PARAM_INT);
         $statement->execute();
-        $resCommande = $statement->fetchAll();
-        var_dump($resCommande);
+        $resCommande = $statement->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($resCommande);
         return $resCommande;
     }
 

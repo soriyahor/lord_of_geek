@@ -44,7 +44,9 @@ switch ($action) {
             afficheMessage("Vous etes connecté");
             $uc = '';
             if(!isset($_SESSION['mail'])){
+                $idClient = M_Compte::recupererUtilisateurId($mail);
                 session_start();
+                $_SESSION['id'] = $idClient;
                 $_SESSION['date'] = date('\l\e d/m/Y à H:i:s');
                 $_SESSION['mail'] = $mail;
             }

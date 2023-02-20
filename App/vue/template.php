@@ -18,7 +18,7 @@ Prototype de Lord Of Geek (LOG)
         <!--  Menu haut-->
         <nav id="menu">
             <ul>
-                <li><a href="index.php?uc=accueil"> Accueil </a></li>
+                <li><a href="index.php?uc=accueil&action=accueil"> Accueil </a></li>
                 <li><a href="index.php?uc=visite&action=voirTousLesJeux"> Voir le catalogue de jeux </a></li>
                 <li><a href="index.php?uc=panier&action=voirPanier"> Voir son panier </a></li>
                 <li><a href="index.php?uc=compte"> Mon compte </a></li>
