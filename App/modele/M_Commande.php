@@ -25,16 +25,22 @@ class M_Commande
     public static function creerCommande($listJeux)
     {
         $erreurs = [];
-        if(!isset($_SESSION['id'])){
+        if(!isset($_SESSION['client'])){
             $erreurs[] = "Connectez-vous !";
             return $erreurs;
         }
         
-        $idClient = $_SESSION['id'];
+        $idClient = $_SESSION['client']->getId();
         // var_dump($_SESSION);
-        $reqCommande = "insert into commandes(id_clients) values ('$idClient')";
+        $reqCommande = "insert into commandes(id_clients) values (:idClient)";
+        $pdo=AccesDonnees::getPdo();
+        $statement=$pdo->prepare($reqCommande);
+        $statement->bindParam(':idClient', $idClient, PDO::PARAM_INT);
+        $statement->execute();
+        $resCommande = $statement->fetch(PDO::FETCH_ASSOC);
 
-        AccesDonnees::exec($reqCommande);
+
+        // AccesDonnees::exec($reqCommande);
         $idCommande = AccesDonnees::getPdo()->lastInsertId();
 
         foreach ($listJeux as $jeu) {
@@ -51,7 +57,11 @@ class M_Commande
         }
         return $erreurs;
     }
-
+    /**
+     * voir l'historique des commandes
+     *
+     * @return void
+     */
     public static function voirCommandes()
     {
 
@@ -74,11 +84,11 @@ class M_Commande
         join categories as ca
         on ca.id = jeu.id_categories
         where id_clients = :idClient
-        order by id";
-
+        order by id desc";
+        $idClient = $_SESSION['client']->getId();
         $pdo=AccesDonnees::getPdo();
         $statement=$pdo->prepare($reqCommande);
-        $statement->bindParam(':idClient',$_SESSION['id'], PDO::PARAM_INT);
+        $statement->bindParam(':idClient',$idClient, PDO::PARAM_INT);
         $statement->execute();
         $resCommande = $statement->fetchAll(PDO::FETCH_ASSOC);
         // var_dump($resCommande);

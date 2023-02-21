@@ -35,6 +35,10 @@
                 <input id="mdp" type="text"  name="mdp"size ="25" maxlength="25">
             </p> 
             <p>
+                <label for="confirmMdp">Confirmer le mot de passe* </label>
+                <input id="confirmMdp" type="text"  name="confirmMdp"size ="25" maxlength="25">
+            </p> 
+            <p>
                 <input type="submit" value="Valider" name="valider">
                 <input type="reset" value="Annuler" name="annuler">
             </p>

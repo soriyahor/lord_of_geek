@@ -37,4 +37,8 @@ function estUnMail($mail) {
     return preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
 }
 
+// function estUnMdp($mdp){
+//     return preg_match(''), $mdp;
+// }
+
 

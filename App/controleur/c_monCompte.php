@@ -9,9 +9,11 @@ include 'App/modele/M_Commande.php';
  */
 switch ($action) {
     case 'historique':
-
-        $commandes = M_Commande::voirCommandes();
-
+        if (isset($_SESSION['client'])) {
+            $commandes = M_Commande::voirCommandes();
+        }else{
+            $commandes = [];
+        }
         break;
     case 'inscription':
         $nom = filter_input(INPUT_POST, 'nom');
@@ -22,15 +24,18 @@ switch ($action) {
         $cp = filter_input(INPUT_POST, 'cp');
         $mail = filter_input(INPUT_POST, 'mail');
         $mdp = filter_input(INPUT_POST, 'mdp');
+        $confirmMdp = filter_input(INPUT_POST, 'confirmMdp');
 
         $errors = M_Compte::estValide($nom, $prenom, $numRue, $rue, $ville, $cp, $mail, $mdp);
         if (count($errors) > 0) {
             // Si une erreur, on recommence
             afficheErreurs($errors);
-        } else {
+        } if($mdp === $confirmMdp){
             M_Compte::CreerInscription($nom, $prenom, $numRue, $rue, $cp, $ville, $mail, $mdp);
             afficheMessage("Votre compte est créé");
             $uc = '';
+        }else {
+            afficheMessage("Vous n'avez pas le même mot de passe. Veuillez recommencer.");
         }
         break;
     case 'connexion':
@@ -43,13 +48,14 @@ switch ($action) {
         } else {
             afficheMessage("Vous etes connecté");
             $uc = '';
-            if(!isset($_SESSION['mail'])){
+            if(!isset($_SESSION['client'])){
                 $idClient = M_Compte::recupererUtilisateurId($mail);
-                session_start();
-                $_SESSION['id'] = $idClient;
-                $_SESSION['date'] = date('\l\e d/m/Y à H:i:s');
-                $_SESSION['mail'] = $mail;
+                $client = new Client($idClient, date('\l\e d/m/Y à H:i:s'), $mail);
+                $_SESSION['client'] = $client;
             }
         }
+        break;
+    case 'deconnexion':
+        M_Session::deconnexion();
         break;
 }

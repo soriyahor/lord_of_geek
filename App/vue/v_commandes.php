@@ -22,7 +22,7 @@
         foreach ($value as $keys => $values) {
             echo "<td style='border:1px solid black'>" . $values . "</td>";
         }
-        echo "<tr>" . "</br>";
+        echo "<tr>";
     }
 
     ?>

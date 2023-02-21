@@ -148,8 +148,8 @@ class M_Session
         // prepare and bind
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":mail", $mail);
-        $stmt->bindParam(":mdp", $mdp);
+        $stmt->bindParam(":mail", $mail, PDO::PARAM_STR);
+        $stmt->bindParam(":mdp", $mdp, PDO::PARAM_STR);
 
         // Exécution
         $stmt->execute();
@@ -168,14 +168,20 @@ class M_Session
         return (bool) $existe;
     }
 
-
+    /**
+     * verifie le mail ou mdp
+     *
+     * @param String $mail
+     * @param String $mdp
+     * @return void
+     */
     public static function checkPassword(String $mail, String $mdp)
     {
 
         $sql = "SELECT email, mdp FROM clients WHERE email = :mail";
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(":mail", $mail);
+        $stmt->bindParam(":mail", $mail, PDO::PARAM_STR);
 
         $stmt->execute();
 
@@ -185,6 +191,7 @@ class M_Session
         return password_verify($mdp, $mdp_bdd);
     }
 
+    
     public static function connexionValide($mail, $mdp)
     {
         $erreurs = [];
@@ -198,5 +205,11 @@ class M_Session
             $erreurs[] = "email ou mot de passe incorrect";
         }
         return $erreurs;
+    }
+
+    public static function deconnexion(){
+        unset($_SESSION['client']);       
+        header('location: index.php');
+        die;
     }
 }
