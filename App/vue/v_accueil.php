@@ -9,20 +9,15 @@
     <h3> les derniers jeux consultés</h3>
     <section id="jeux">
         <?php
-        var_dump($_SESSION);
-        
-        if (!isset($_SESSION['client'])) {
-            return;
-        } else {
-            foreach ($lesJeux as $unJeu) {
-                $id = $unJeu['id'];
-                $nom = $unJeu['nom'];
-                $etat = $unJeu['statut'];
-                $description = $unJeu['description'];
-                $prix = $unJeu['prix'];
-                $image = $unJeu['image'];
-                $categorie = $unJeu['id_categories'];
-            
+        foreach ($lesJeux as $unJeu) {
+            $id = $unJeu['id'];
+            $nom = $unJeu['nom'];
+            $etat = $unJeu['statut'];
+            $description = $unJeu['description'];
+            $prix = $unJeu['prix'];
+            $image = $unJeu['image'];
+            $categorie = $unJeu['id_categories'];
+
         ?>
             <article>
                 <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>" />
@@ -37,7 +32,6 @@
             </article>
         <?php
         }
-    }
         ?>
     </section>
 </section>

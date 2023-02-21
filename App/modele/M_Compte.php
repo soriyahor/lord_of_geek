@@ -35,8 +35,8 @@ class M_Compte
         $idClient = AccesDonnees::getPdo()->lastInsertId();
     }
 
-    public static function recupererUtilisateurId($mail) {
-        $sql = 'SELECT id FROM clients ';
+    public static function recupererUtilisateur($mail) {
+        $sql = 'SELECT * FROM clients ';
         $sql .= 'WHERE email = :mail';
 
         // prepare and bind
@@ -46,7 +46,7 @@ class M_Compte
         $stmt->execute();
         // Exécution
         $res = $stmt->fetch();
-        return $res['id'];
+        return $res;
 
     }
 

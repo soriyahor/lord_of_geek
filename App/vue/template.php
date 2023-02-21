@@ -28,7 +28,11 @@ Prototype de Lord Of Geek (LOG)
                 <li><a href="index.php?uc=deconnexion&action=deconnexion"> Déconnexion </a></li>
             </ul>
         </nav>
-
+        <?php
+        if (isset($_SESSION['client'])){
+            echo $_SESSION['client']->getNom();
+        }
+        ?>
     </header>
     <main>
         <?php
