@@ -79,6 +79,7 @@ header img{
 #visite section {
     width: fit-content;
     display: flex;
+    flex-wrap: wrap;
 }
 
 #visite section article {
@@ -130,4 +131,5 @@ input[type="submit"]
     border: #DDEEFF 1px solid;
     width: 30%;
 }
+
 

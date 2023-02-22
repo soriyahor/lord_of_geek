@@ -28,7 +28,7 @@
             <article>
                 <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>"/>
                 <p><?= $nom ?></p>
-                <p><?= $etat ?></p>               
+                <p><?= "Etat : " . $etat ?></p>               
                 <p><?= $description ?></p>
                 <p><?= "Prix : " . $prix . " Euros" ?>
                     <a href="index.php?uc=visite&categorie=<?= $categorie ?>&jeu=<?= $id ?>&action=ajouterAuPanier">

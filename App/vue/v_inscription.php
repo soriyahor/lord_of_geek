@@ -32,11 +32,11 @@
             </p> 
             <p>
                 <label for="mdp">mot de passe* </label>
-                <input id="mdp" type="text"  name="mdp"size ="25" maxlength="25">
+                <input id="mdp" type="password"  name="mdp"size ="25" maxlength="25">
             </p> 
             <p>
                 <label for="confirmMdp">Confirmer le mot de passe* </label>
-                <input id="confirmMdp" type="text"  name="confirmMdp"size ="25" maxlength="25">
+                <input id="confirmMdp" type="password"  name="confirmMdp"size ="25" maxlength="25">
             </p> 
             <p>
                 <input type="submit" value="Valider" name="valider">

@@ -30,7 +30,7 @@ Prototype de Lord Of Geek (LOG)
         </nav>
         <?php
         if (isset($_SESSION['client'])){
-            echo $_SESSION['client']->getNom();
+            echo "Bonjour " . $_SESSION['client']->getNom();
         }
         ?>
     </header>
